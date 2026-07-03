@@ -180,6 +180,45 @@
   }
   .btn-secondary:hover{border-color:var(--accent); color:var(--accent);}
 
+  .resume-dropdown{
+    position:relative;
+    display:inline-flex;
+    margin-right:16px;
+    margin-bottom:16px;
+  }
+  .resume-dropdown .btn{
+    margin-right:0;
+    margin-bottom:0;
+    cursor:pointer;
+    font:inherit;
+    background:none;
+  }
+  .resume-menu{
+    position:absolute;
+    top:calc(100% + 8px);
+    left:0;
+    min-width:190px;
+    background:var(--paper-raised);
+    border:1px solid var(--ink);
+    box-shadow:4px 4px 0 var(--accent-soft);
+    z-index:20;
+  }
+  .resume-menu[hidden]{display:none;}
+  .resume-menu a{
+    display:block;
+    padding:11px 16px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--ink);
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+  }
+  .resume-menu a:last-child{border-bottom:none;}
+  .resume-menu a:hover, .resume-menu a:focus-visible{
+    background:var(--paper);
+    color:var(--accent);
+  }
+
   /* Ledger profile card (signature element) — faint ruled texture lives here only */
   .ledger-card{
     background-color:var(--paper-raised);
@@ -452,7 +491,14 @@
       <div class="cta-row">
         <a class="btn btn-primary" href="mailto:mustapha.bouchaqour@gmail.com">Email me</a>
         <a class="btn btn-secondary" href="https://www.linkedin.com/in/mbouchaqour/" target="_blank" rel="noopener">View LinkedIn →</a>
-        <a class="btn btn-secondary" href="mailto:mustapha.bouchaqour@gmail.com?subject=Resume%20Request&amp;body=Hi%20Mustapha%2C%0A%0ACould%20you%20send%20over%20your%20resume%3F%0A%0AThanks!">Request Resume →</a>
+        <div class="resume-dropdown">
+          <button type="button" class="btn btn-secondary" id="resumeBtn" aria-haspopup="true" aria-expanded="false" aria-controls="resumeMenu">Request Resume →</button>
+          <div class="resume-menu" id="resumeMenu" role="menu" hidden>
+            <a role="menuitem" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=mustapha.bouchaqour@gmail.com&amp;su=Resume%20Request&amp;body=Hi%20Mustapha%2C%0A%0ACould%20you%20send%20over%20your%20resume%3F%0A%0AThanks!" target="_blank" rel="noopener">Gmail</a>
+            <a role="menuitem" href="https://outlook.office.com/mail/deeplink/compose?to=mustapha.bouchaqour@gmail.com&amp;subject=Resume%20Request&amp;body=Hi%20Mustapha%2C%0A%0ACould%20you%20send%20over%20your%20resume%3F%0A%0AThanks!" target="_blank" rel="noopener">Outlook</a>
+            <a role="menuitem" href="mailto:mustapha.bouchaqour@gmail.com?subject=Resume%20Request&amp;body=Hi%20Mustapha%2C%0A%0ACould%20you%20send%20over%20your%20resume%3F%0A%0AThanks!">Default Mail App</a>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -693,5 +739,42 @@
   </div>
 </footer>
 
+<script>
+  (function(){
+    var btn = document.getElementById('resumeBtn');
+    var menu = document.getElementById('resumeMenu');
+    if(!btn || !menu) return;
+
+    function openMenu(){
+      menu.hidden = false;
+      btn.setAttribute('aria-expanded', 'true');
+    }
+    function closeMenu(){
+      menu.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+    }
+    function isOpen(){
+      return !menu.hidden;
+    }
+
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      isOpen() ? closeMenu() : openMenu();
+    });
+
+    document.addEventListener('click', function(e){
+      if(isOpen() && !menu.contains(e.target) && e.target !== btn){
+        closeMenu();
+      }
+    });
+
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && isOpen()){
+        closeMenu();
+        btn.focus();
+      }
+    });
+  })();
+</script>
 </body>
 </html>
