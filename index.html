@@ -423,6 +423,59 @@
   }
   .quiz-retake:hover{border-color:var(--accent); color:var(--accent);}
 
+  /* ===== Skill Growth Timeline ===== */
+  .timeline-card{
+    background:var(--paper-raised);
+    border:1px solid var(--ink);
+    box-shadow:6px 6px 0 var(--accent-soft);
+    padding:clamp(20px, 3vw, 32px);
+  }
+  .timeline-svg{
+    width:100%;
+    height:auto;
+    display:block;
+    overflow:visible;
+  }
+  .timeline-grid{
+    stroke:var(--line);
+    stroke-width:1;
+  }
+  .timeline-grid-present{
+    stroke:var(--ink);
+    stroke-width:1.5;
+  }
+  .timeline-bar{
+    fill:var(--ink);
+  }
+  .timeline-bar-accent{
+    fill:var(--accent);
+  }
+  .timeline-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    fill:var(--ink-soft);
+  }
+  .timeline-year{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    fill:var(--muted);
+  }
+  .timeline-year-present{
+    fill:var(--accent);
+    font-weight:600;
+  }
+  .sr-only{
+    position:absolute;
+    width:1px;
+    height:1px;
+    padding:0;
+    margin:-1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    white-space:nowrap;
+    border:0;
+  }
+
   /* ===== Section shared ===== */
   section{padding:var(--space-section) 0;}
   .section-head{
@@ -647,6 +700,7 @@
     </div>
     <nav>
       <a href="#about">About</a>
+      <a href="#skills-timeline">Growth</a>
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
       <a href="#writing">Writing</a>
@@ -770,6 +824,79 @@
           <span class="tag">Reading</span>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="skills-timeline">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Skill Growth Over Time</h2>
+    </div>
+    <p class="quiz-intro">Not a confidence score — just when each tool actually entered my day-to-day work, based on my real role history.</p>
+
+    <div class="timeline-card">
+      <svg viewBox="0 0 960 400" class="timeline-svg" role="img" aria-labelledby="timelineTitle timelineDesc" preserveAspectRatio="xMidYMid meet">
+        <title id="timelineTitle">Skill adoption timeline, 2020 to present</title>
+        <desc id="timelineDesc">Horizontal bars showing which tools I have used and since which year: Excel, SQL, Tableau, Power BI, and Python since 2020; Power Automate since 2022; Power Query and DAX since 2023; and Prompt Engineering and Agentic AI since 2025.</desc>
+
+        <!-- vertical gridlines -->
+        <line x1="220" y1="30" x2="220" y2="360" class="timeline-grid"></line>
+        <line x1="336.667" y1="30" x2="336.667" y2="360" class="timeline-grid"></line>
+        <line x1="453.333" y1="30" x2="453.333" y2="360" class="timeline-grid"></line>
+        <line x1="570" y1="30" x2="570" y2="360" class="timeline-grid"></line>
+        <line x1="686.667" y1="30" x2="686.667" y2="360" class="timeline-grid"></line>
+        <line x1="803.333" y1="30" x2="803.333" y2="360" class="timeline-grid"></line>
+        <line x1="920" y1="30" x2="920" y2="360" class="timeline-grid timeline-grid-present"></line>
+
+        <!-- bars -->
+        <rect x="220" y="39.625" width="700" height="22" rx="3" class="timeline-bar"></rect>
+        <rect x="220" y="80.875" width="700" height="22" rx="3" class="timeline-bar"></rect>
+        <rect x="220" y="122.125" width="700" height="22" rx="3" class="timeline-bar"></rect>
+        <rect x="220" y="163.375" width="700" height="22" rx="3" class="timeline-bar"></rect>
+        <rect x="220" y="204.625" width="700" height="22" rx="3" class="timeline-bar"></rect>
+        <rect x="453.333" y="245.875" width="466.667" height="22" rx="3" class="timeline-bar"></rect>
+        <rect x="570" y="287.125" width="350" height="22" rx="3" class="timeline-bar"></rect>
+        <rect x="803.333" y="328.375" width="116.667" height="22" rx="3" class="timeline-bar timeline-bar-accent"></rect>
+
+        <!-- skill labels -->
+        <text x="210" y="54.625" class="timeline-label" text-anchor="end">Excel</text>
+        <text x="210" y="95.875" class="timeline-label" text-anchor="end">SQL</text>
+        <text x="210" y="137.125" class="timeline-label" text-anchor="end">Tableau</text>
+        <text x="210" y="178.375" class="timeline-label" text-anchor="end">Power BI</text>
+        <text x="210" y="219.625" class="timeline-label" text-anchor="end">Python</text>
+        <text x="210" y="260.875" class="timeline-label" text-anchor="end">Power Automate</text>
+        <text x="210" y="302.125" class="timeline-label" text-anchor="end">Power Query &amp; DAX</text>
+        <text x="210" y="343.375" class="timeline-label" text-anchor="end">Agentic AI &amp; Prompting</text>
+
+        <!-- year axis labels -->
+        <text x="220" y="378" class="timeline-year" text-anchor="middle">2020</text>
+        <text x="336.667" y="378" class="timeline-year" text-anchor="middle">2021</text>
+        <text x="453.333" y="378" class="timeline-year" text-anchor="middle">2022</text>
+        <text x="570" y="378" class="timeline-year" text-anchor="middle">2023</text>
+        <text x="686.667" y="378" class="timeline-year" text-anchor="middle">2024</text>
+        <text x="803.333" y="378" class="timeline-year" text-anchor="middle">2025</text>
+        <text x="920" y="378" class="timeline-year timeline-year-present" text-anchor="middle">Present</text>
+      </svg>
+
+      <table class="sr-only">
+        <caption>Skill adoption timeline: when each tool entered my work, based on my role history</caption>
+        <thead>
+          <tr><th>Skill</th><th>Since</th><th>Through</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Excel</td><td>2020</td><td>Present</td></tr>
+          <tr><td>SQL</td><td>2020</td><td>Present</td></tr>
+          <tr><td>Tableau</td><td>2020</td><td>Present</td></tr>
+          <tr><td>Power BI</td><td>2020</td><td>Present</td></tr>
+          <tr><td>Python</td><td>2020</td><td>Present</td></tr>
+          <tr><td>Power Automate</td><td>2022</td><td>Present</td></tr>
+          <tr><td>Power Query &amp; DAX</td><td>2023</td><td>Present</td></tr>
+          <tr><td>Prompt Engineering &amp; Agentic AI</td><td>2025</td><td>Present</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
