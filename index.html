@@ -324,6 +324,105 @@
     color:var(--ink);
   }
 
+  /* ===== AI Readiness Quiz ===== */
+  .quiz-intro{
+    color:var(--ink-soft);
+    font-size:15.5px;
+    max-width:60ch;
+    margin:0 0 32px;
+  }
+  .quiz-card{
+    background:var(--paper-raised);
+    border:1px solid var(--ink);
+    box-shadow:6px 6px 0 var(--accent-soft);
+    padding:clamp(24px, 4vw, 40px);
+  }
+  .quiz-question{margin-bottom:28px;}
+  .quiz-question:last-of-type{margin-bottom:24px;}
+  .quiz-q-text{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600;
+    font-size:15.5px;
+    color:var(--ink);
+    margin:0 0 14px;
+  }
+  .quiz-options{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .quiz-option{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    cursor:pointer;
+    padding:11px 14px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    transition:border-color .15s ease, background .15s ease, color .15s ease;
+  }
+  .quiz-option:hover{border-color:var(--accent);}
+  .quiz-option input{
+    accent-color:var(--accent);
+    cursor:pointer;
+    flex-shrink:0;
+  }
+  .quiz-option.is-selected{
+    border-color:var(--accent);
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .quiz-warning{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--accent);
+    margin:0 0 16px;
+  }
+  .quiz-result{
+    margin-top:28px;
+    padding-top:28px;
+    border-top:1px solid var(--line);
+  }
+  .quiz-score{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 10px;
+  }
+  .quiz-result h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.4rem;
+    color:var(--ink);
+    margin:0 0 12px;
+  }
+  .quiz-result p{
+    color:var(--ink-soft);
+    font-size:15px;
+    line-height:1.7;
+    margin:0 0 16px;
+  }
+  .quiz-cta{
+    font-size:14px !important;
+  }
+  .quiz-retake{
+    background:none;
+    border:1px solid var(--ink);
+    color:var(--ink);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    padding:10px 18px;
+    border-radius:var(--radius);
+    cursor:pointer;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .quiz-retake:hover{border-color:var(--accent); color:var(--accent);}
+
   /* ===== Section shared ===== */
   section{padding:var(--space-section) 0;}
   .section-head{
@@ -552,6 +651,7 @@
       <a href="#projects">Projects</a>
       <a href="#writing">Writing</a>
       <a href="#certifications">Certs</a>
+      <a href="#ai-readiness">AI Check</a>
       <a href="#connect">Connect</a>
     </nav>
     <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
@@ -812,6 +912,85 @@
   </div>
 </section>
 
+<hr class="rule">
+
+<section id="ai-readiness">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>How AI-Ready Is Your Team?</h2>
+    </div>
+    <p class="quiz-intro">A quick, honest check — answer 5 questions about how your team actually works with AI today, not how you wish it did.</p>
+
+    <div class="quiz-card">
+      <form id="quizForm">
+        <div class="quiz-question">
+          <p class="quiz-q-text">1. How does your team currently use AI tools day-to-day?</p>
+          <div class="quiz-options">
+            <label class="quiz-option"><input type="radio" name="q1" value="0"> We don't use AI tools at all</label>
+            <label class="quiz-option"><input type="radio" name="q1" value="1"> A few individuals experiment on their own</label>
+            <label class="quiz-option"><input type="radio" name="q1" value="2"> Used in some workflows, but informally</label>
+            <label class="quiz-option"><input type="radio" name="q1" value="3"> Integrated into official workflows with guidelines</label>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p class="quiz-q-text">2. How is AI adoption measured or tracked?</p>
+          <div class="quiz-options">
+            <label class="quiz-option"><input type="radio" name="q2" value="0"> It isn't tracked at all</label>
+            <label class="quiz-option"><input type="radio" name="q2" value="1"> Anecdotal evidence only, no formal metrics</label>
+            <label class="quiz-option"><input type="radio" name="q2" value="2"> We track usage, but not business impact</label>
+            <label class="quiz-option"><input type="radio" name="q2" value="3"> We track both usage and measurable outcomes</label>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p class="quiz-q-text">3. How prepared is your team for AI-related risks (data privacy, model errors, compliance)?</p>
+          <div class="quiz-options">
+            <label class="quiz-option"><input type="radio" name="q3" value="0"> Hasn't come up</label>
+            <label class="quiz-option"><input type="radio" name="q3" value="1"> Aware of it, but no formal policy</label>
+            <label class="quiz-option"><input type="radio" name="q3" value="2"> Informal guidelines exist</label>
+            <label class="quiz-option"><input type="radio" name="q3" value="3"> Formal governance/risk framework in place</label>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p class="quiz-q-text">4. How does leadership support AI initiatives?</p>
+          <div class="quiz-options">
+            <label class="quiz-option"><input type="radio" name="q4" value="0"> No visible support</label>
+            <label class="quiz-option"><input type="radio" name="q4" value="1"> Curious, but not actively involved</label>
+            <label class="quiz-option"><input type="radio" name="q4" value="2"> Sponsors pilot projects</label>
+            <label class="quiz-option"><input type="radio" name="q4" value="3"> Clear AI strategy and dedicated resourcing</label>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p class="quiz-q-text">5. How do employees get trained or supported in using AI tools?</p>
+          <div class="quiz-options">
+            <label class="quiz-option"><input type="radio" name="q5" value="0"> No training available</label>
+            <label class="quiz-option"><input type="radio" name="q5" value="1"> Expected to figure it out on their own</label>
+            <label class="quiz-option"><input type="radio" name="q5" value="2"> Occasional training sessions or shared resources</label>
+            <label class="quiz-option"><input type="radio" name="q5" value="3"> Structured, ongoing enablement program</label>
+          </div>
+        </div>
+
+        <p class="quiz-warning" id="quizWarning" role="alert" hidden>Please answer all 5 questions to see your score.</p>
+
+        <button type="submit" class="btn btn-primary" id="quizSubmit">See My Score</button>
+
+        <div class="quiz-result" id="quizResult" tabindex="-1" hidden>
+          <p class="quiz-score" id="quizScore"></p>
+          <h3 id="quizResultTitle"></h3>
+          <p id="quizResultText"></p>
+          <p class="quiz-cta">If any of this resonates, <a href="#connect">let's talk</a> — this is exactly the kind of gap I help teams close.</p>
+          <button type="button" class="quiz-retake" id="quizRetake">Retake the quiz</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
 <footer id="connect">
   <div class="wrap">
     <div class="section-head">
@@ -896,6 +1075,105 @@
       var next = current === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
       try { localStorage.setItem('theme', next); } catch(e) {}
+    });
+  })();
+
+  (function(){
+    var form = document.getElementById('quizForm');
+    if(!form) return;
+
+    var warning = document.getElementById('quizWarning');
+    var result = document.getElementById('quizResult');
+    var scoreEl = document.getElementById('quizScore');
+    var titleEl = document.getElementById('quizResultTitle');
+    var textEl = document.getElementById('quizResultText');
+    var retakeBtn = document.getElementById('quizRetake');
+    var submitBtn = document.getElementById('quizSubmit');
+
+    var bands = [
+      {
+        max: 3,
+        title: "Just Starting",
+        text: "Most organizations start here — AI adoption isn't really happening yet, whether by choice or by default. That's not a bad place to be, but it does mean there's a clear opportunity: a bit of structure (a pilot project, clear ownership, a first real use case) goes a long way."
+      },
+      {
+        max: 7,
+        title: "Exploring",
+        text: "Some AI use is happening, but it's scattered and informal — a few people experimenting without shared standards or visibility. That's a normal, healthy stage, but it's also where momentum stalls without intentional support. Formalizing what's already working is usually the fastest next step."
+      },
+      {
+        max: 11,
+        title: "Building Momentum",
+        text: "There's real structure here — leadership involvement, some tracking, some governance. The gap at this stage is usually less about tools and more about scaling what's working without losing the guardrails."
+      },
+      {
+        max: 15,
+        title: "Adoption Leader",
+        text: "This is a genuinely mature setup — leadership-backed, measured, and governed. Most organizations aren't here yet. The next challenge is usually less about adoption and more about continuously proving ROI as the tools keep changing."
+      }
+    ];
+
+    function updateSelectedStyles(name){
+      var inputs = form.querySelectorAll('input[name="' + name + '"]');
+      inputs.forEach(function(input){
+        var label = input.closest('.quiz-option');
+        if(input.checked){
+          label.classList.add('is-selected');
+        } else {
+          label.classList.remove('is-selected');
+        }
+      });
+    }
+
+    ['q1','q2','q3','q4','q5'].forEach(function(name){
+      form.querySelectorAll('input[name="' + name + '"]').forEach(function(input){
+        input.addEventListener('change', function(){ updateSelectedStyles(name); });
+      });
+    });
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var total = 0, answered = 0;
+      ['q1','q2','q3','q4','q5'].forEach(function(name){
+        var checked = form.querySelector('input[name="' + name + '"]:checked');
+        if(checked){
+          total += parseInt(checked.value, 10);
+          answered++;
+        }
+      });
+
+      if(answered < 5){
+        warning.hidden = false;
+        return;
+      }
+      warning.hidden = true;
+
+      var band = bands[0];
+      for(var i = 0; i < bands.length; i++){
+        if(total <= bands[i].max){ band = bands[i]; break; }
+      }
+
+      scoreEl.textContent = 'Your score: ' + total + ' / 15 — ' + band.title;
+      titleEl.textContent = band.title;
+      textEl.textContent = band.text;
+
+      form.querySelectorAll('.quiz-question, .quiz-warning, #quizSubmit').forEach(function(el){
+        el.style.display = 'none';
+      });
+      result.hidden = false;
+      result.focus();
+    });
+
+    retakeBtn.addEventListener('click', function(){
+      form.reset();
+      form.querySelectorAll('.quiz-option').forEach(function(el){ el.classList.remove('is-selected'); });
+      form.querySelectorAll('.quiz-question, .quiz-warning, #quizSubmit').forEach(function(el){
+        el.style.display = '';
+      });
+      warning.hidden = true;
+      result.hidden = true;
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      form.querySelector('.quiz-question').scrollIntoView({behavior: prefersReduced ? 'auto' : 'smooth', block: 'center'});
     });
   })();
 </script>
