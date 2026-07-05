@@ -476,6 +476,104 @@
     border:0;
   }
 
+  /* ===== Accordion (progressive disclosure) ===== */
+  .accordion-toggle{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    width:100%;
+    background:none;
+    border:1px solid var(--ink);
+    border-radius:var(--radius);
+    padding:14px 20px;
+    cursor:pointer;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px;
+    color:var(--ink);
+    text-align:left;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .accordion-toggle:hover{border-color:var(--accent); color:var(--accent);}
+  .accordion-icon{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:18px;
+    line-height:1;
+    color:var(--accent);
+    flex-shrink:0;
+    margin-left:12px;
+  }
+  .accordion-panel{
+    margin-top:28px;
+  }
+  .accordion-panel[hidden]{display:none;}
+
+  /* ===== Skill Category Line Chart ===== */
+  .subchart-title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.2rem;
+    color:var(--ink);
+    margin:40px 0 10px;
+  }
+  .linechart-svg{
+    width:100%;
+    height:auto;
+    display:block;
+    overflow:visible;
+    margin-top:16px;
+  }
+  .line-series{
+    fill:none;
+    stroke-width:2.5;
+  }
+  .line-series-1{stroke:var(--ink);}
+  .line-series-2{stroke:var(--muted); stroke-dasharray:5,4;}
+  .line-series-3{stroke:var(--ink); stroke-dasharray:1,5; stroke-linecap:round;}
+  .line-series-4{stroke:var(--accent); stroke-width:3.5;}
+  .line-endpoint{fill:var(--paper-raised); stroke-width:2;}
+  circle.line-series-2{stroke:var(--muted);}
+
+  .chart-legend{
+    display:flex;
+    flex-wrap:wrap;
+    margin-top:28px;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+  }
+  .legend-item{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    flex:0 0 calc(50% - 16px);
+    margin-right:32px;
+    margin-bottom:20px;
+  }
+  .legend-item:nth-child(2n){
+    margin-right:0;
+  }
+  .legend-swatch{
+    width:40px;
+    height:14px;
+    flex-shrink:0;
+    margin-top:4px;
+    overflow:visible;
+  }
+  .legend-name{
+    display:block;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600;
+    font-size:13.5px;
+    color:var(--ink);
+    margin-bottom:3px;
+  }
+  .legend-desc{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--muted);
+    line-height:1.5;
+  }
+
   /* ===== Section shared ===== */
   section{padding:var(--space-section) 0;}
   .section-head{
@@ -635,6 +733,7 @@
     .hero-grid{grid-template-columns:1fr;}
     .about-grid{grid-template-columns:1fr;}
     .offer-item{grid-template-columns:1fr; gap:8px; padding:22px 0;}
+    .chart-legend .legend-item{flex-basis:100%; margin-right:0;}
     nav{gap:16px;}
   }
 
@@ -835,6 +934,11 @@
     <div class="section-head">
       <h2>Skill Growth Over Time</h2>
     </div>
+    <button type="button" class="accordion-toggle" id="skillsToggle" aria-expanded="false" aria-controls="skillsPanel">
+      <span>View skills chart</span>
+      <span class="accordion-icon" aria-hidden="true">+</span>
+    </button>
+    <div class="accordion-panel" id="skillsPanel" hidden>
     <p class="quiz-intro">Not a confidence score — just when each tool actually entered my day-to-day work, based on my real role history.</p>
 
     <div class="timeline-card">
@@ -897,6 +1001,105 @@
           <tr><td>Prompt Engineering &amp; Agentic AI</td><td>2025</td><td>Present</td></tr>
         </tbody>
       </table>
+
+      <h3 class="subchart-title">The Long View: Skill Categories Since 2000</h3>
+      <p class="quiz-intro">A broader look at how my skill focus has shifted across four eras of my career — from early programming to data analytics to AI.</p>
+
+      <svg viewBox="0 0 960 440" class="linechart-svg" role="img" aria-labelledby="lineTitle lineDesc" preserveAspectRatio="xMidYMid meet">
+        <title id="lineTitle">Skill category usage from 2000 to present</title>
+        <desc id="lineDesc">Line chart showing four skill categories and their usage intensity over time. Programming Languages: rarely used 2000-2011, occasionally used 2012-2016, regularly used 2016-2020, frequently used 2020-present. Legacy Dev Tools and Platforms: rarely used 2000-2011, then discontinued. Data and Analytics Tools: regularly used 2016-2020, frequently used 2020-present. AI and Automation: frequently used starting 2020.</desc>
+
+        <!-- horizontal gridlines at each intensity level -->
+        <line x1="150" y1="320" x2="920" y2="320" class="timeline-grid"></line>
+        <line x1="150" y1="223.33" x2="920" y2="223.33" class="timeline-grid"></line>
+        <line x1="150" y1="126.67" x2="920" y2="126.67" class="timeline-grid"></line>
+        <line x1="150" y1="30" x2="920" y2="30" class="timeline-grid"></line>
+
+        <!-- vertical gridlines at labeled years -->
+        <line x1="150" y1="30" x2="150" y2="320" class="timeline-grid"></line>
+        <line x1="475.77" y1="30" x2="475.77" y2="320" class="timeline-grid"></line>
+        <line x1="623.85" y1="30" x2="623.85" y2="320" class="timeline-grid"></line>
+        <line x1="742.31" y1="30" x2="742.31" y2="320" class="timeline-grid"></line>
+        <line x1="920" y1="30" x2="920" y2="320" class="timeline-grid timeline-grid-present"></line>
+
+        <!-- y-axis level labels -->
+        <text x="140" y="324" class="timeline-year" text-anchor="end">Rarely Used</text>
+        <text x="140" y="227.33" class="timeline-year" text-anchor="end">Occasionally Used</text>
+        <text x="140" y="130.67" class="timeline-year" text-anchor="end">Regularly Used</text>
+        <text x="140" y="34" class="timeline-year" text-anchor="end">Frequently Used</text>
+
+        <!-- x-axis year labels -->
+        <text x="150" y="340" class="timeline-year" text-anchor="middle">2000</text>
+        <text x="475.77" y="340" class="timeline-year" text-anchor="middle">2011</text>
+        <text x="623.85" y="340" class="timeline-year" text-anchor="middle">2016</text>
+        <text x="742.31" y="340" class="timeline-year" text-anchor="middle">2020</text>
+        <text x="920" y="340" class="timeline-year timeline-year-present" text-anchor="middle">Present</text>
+
+        <!-- Category 1: Programming Languages -->
+        <polyline points="150,320 475.77,320 505.38,223.33 623.85,223.33 623.85,126.67 742.31,126.67 742.31,30 920,30"
+          class="line-series line-series-1"></polyline>
+
+        <!-- Category 2: Legacy Dev Tools & Platforms -->
+        <polyline points="150,326 475.77,326" class="line-series line-series-2"></polyline>
+        <circle cx="475.77" cy="326" r="5" class="line-endpoint line-series-2"></circle>
+
+        <!-- Category 3: Data & Analytics Tools -->
+        <polyline points="623.85,132.67 742.31,132.67 742.31,36 920,36" class="line-series line-series-3"></polyline>
+
+        <!-- Category 4: AI & Automation -->
+        <polyline points="742.31,24 920,24" class="line-series line-series-4"></polyline>
+      </svg>
+
+      <div class="chart-legend">
+        <div class="legend-item">
+          <svg class="legend-swatch" viewBox="0 0 40 10"><line x1="0" y1="5" x2="40" y2="5" class="line-series line-series-1"></line></svg>
+          <div>
+            <span class="legend-name">Programming Languages</span>
+            <span class="legend-desc">QBasic, Visual Basic, C++, Java, JavaScript, Pascal, Python</span>
+          </div>
+        </div>
+        <div class="legend-item">
+          <svg class="legend-swatch" viewBox="0 0 40 10"><line x1="0" y1="5" x2="40" y2="5" class="line-series line-series-2"></line></svg>
+          <div>
+            <span class="legend-name">Legacy Dev Tools &amp; Platforms</span>
+            <span class="legend-desc">Access, Visual Studio, VB.NET — no longer in use</span>
+          </div>
+        </div>
+        <div class="legend-item">
+          <svg class="legend-swatch" viewBox="0 0 40 10"><line x1="0" y1="5" x2="40" y2="5" class="line-series line-series-3"></line></svg>
+          <div>
+            <span class="legend-name">Data &amp; Analytics Tools</span>
+            <span class="legend-desc">Numerical Analysis, Mathematica, Tableau, Excel, Power BI, Power Query, SQL, VBA</span>
+          </div>
+        </div>
+        <div class="legend-item">
+          <svg class="legend-swatch" viewBox="0 0 40 10"><line x1="0" y1="5" x2="40" y2="5" class="line-series line-series-4"></line></svg>
+          <div>
+            <span class="legend-name">AI &amp; Automation</span>
+            <span class="legend-desc">AI tools, AI prompting, agentic AI</span>
+          </div>
+        </div>
+      </div>
+
+      <table class="sr-only">
+        <caption>Skill category usage over time</caption>
+        <thead>
+          <tr><th>Category</th><th>Period</th><th>Usage Level</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Programming Languages</td><td>2000–2011</td><td>Rarely Used</td></tr>
+          <tr><td>Programming Languages</td><td>2012–2016</td><td>Occasionally Used</td></tr>
+          <tr><td>Programming Languages</td><td>2016–2020</td><td>Regularly Used</td></tr>
+          <tr><td>Programming Languages</td><td>2020–Present</td><td>Frequently Used</td></tr>
+          <tr><td>Legacy Dev Tools &amp; Platforms</td><td>2000–2011</td><td>Rarely Used</td></tr>
+          <tr><td>Legacy Dev Tools &amp; Platforms</td><td>2011–Present</td><td>Discontinued</td></tr>
+          <tr><td>Data &amp; Analytics Tools</td><td>2016–2020</td><td>Regularly Used</td></tr>
+          <tr><td>Data &amp; Analytics Tools</td><td>2020–Present</td><td>Frequently Used</td></tr>
+          <tr><td>AI &amp; Automation</td><td>2020–Present</td><td>Frequently Used</td></tr>
+        </tbody>
+      </table>
+
+    </div>
     </div>
   </div>
 </section>
@@ -1046,6 +1249,11 @@
     <div class="section-head">
       <h2>How AI-Ready Is Your Team?</h2>
     </div>
+    <button type="button" class="accordion-toggle" id="quizToggle" aria-expanded="false" aria-controls="quizPanel">
+      <span>Get an AI Quote</span>
+      <span class="accordion-icon" aria-hidden="true">+</span>
+    </button>
+    <div class="accordion-panel" id="quizPanel" hidden>
     <p class="quiz-intro">A quick, honest check — answer 5 questions about how your team actually works with AI today, not how you wish it did.</p>
 
     <div class="quiz-card">
@@ -1112,6 +1320,7 @@
           <button type="button" class="quiz-retake" id="quizRetake">Retake the quiz</button>
         </div>
       </form>
+    </div>
     </div>
   </div>
 </section>
@@ -1302,6 +1511,42 @@
       var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       form.querySelector('.quiz-question').scrollIntoView({behavior: prefersReduced ? 'auto' : 'smooth', block: 'center'});
     });
+  })();
+
+  (function(){
+    var toggles = document.querySelectorAll('.accordion-toggle');
+
+    function setState(toggle, panel, open){
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      panel.hidden = !open;
+      var icon = toggle.querySelector('.accordion-icon');
+      if(icon) icon.textContent = open ? '−' : '+';
+    }
+
+    toggles.forEach(function(toggle){
+      var panel = document.getElementById(toggle.getAttribute('aria-controls'));
+      if(!panel) return;
+
+      toggle.addEventListener('click', function(){
+        var isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        setState(toggle, panel, !isOpen);
+      });
+    });
+
+    function expandForHash(){
+      var hash = window.location.hash;
+      if(!hash) return;
+      var section = document.querySelector(hash);
+      if(!section) return;
+      var toggle = section.querySelector('.accordion-toggle');
+      if(!toggle) return;
+      var panel = document.getElementById(toggle.getAttribute('aria-controls'));
+      if(!panel) return;
+      setState(toggle, panel, true);
+    }
+
+    window.addEventListener('hashchange', expandForHash);
+    expandForHash();
   })();
 </script>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1ae6e759d95b48fface113646a889ecf"}'></script><!-- End Cloudflare Web Analytics -->
