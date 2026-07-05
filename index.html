@@ -146,8 +146,14 @@
     color:var(--ink);
     cursor:pointer;
     flex-shrink:0;
-    margin-left:16px;
+    margin:0 0 0 16px;
     padding:0;
+    line-height:1;
+    font-size:inherit;
+    font-family:inherit;
+    vertical-align:middle;
+    appearance:none;
+    -webkit-appearance:none;
     transition:border-color .15s ease, color .15s ease;
   }
   .theme-toggle:hover{border-color:var(--accent); color:var(--accent);}
@@ -538,8 +544,7 @@
 <header>
   <div class="wrap header-row">
     <div class="stamp">
-      <span class="stamp-mark">MB</span>
-      Mustapha Bouchaqour
+      <span class="stamp-mark" aria-label="Mustapha Bouchaqour">MB</span>
     </div>
     <nav>
       <a href="#about">About</a>
